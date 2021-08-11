@@ -13,5 +13,6 @@ for fname in data/*; do
   long=$(echo "${result}" | grep "GPS Longitude  " | cut -d ':' -f 2 | ./gps)
 
   echo "${short_name},${lat},${long}"
+  echo "${short_name},${lat},${long}" >> out.csv
 
 done
