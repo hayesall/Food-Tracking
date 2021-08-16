@@ -4,10 +4,13 @@ if [[ ! -f gps ]]; then
   gcc gpsconvert.c -o gps
 fi
 
+# Create column names
+echo "fname,latitude,longitude" >> out.csv
+
 for fname in data/*; do
 
   short_name=$(echo "${fname}" | cut -d '/' -f 2)
-  result=$(./exif/Image-ExifTool-12.29/exiftool ${fname})
+  result=$(./exif/Image-ExifTool-12.30/exiftool ${fname})
 
   lat=$(echo "${result}" | grep "GPS Latitude  " | cut -d ":" -f 2 | ./gps)
   long=$(echo "${result}" | grep "GPS Longitude  " | cut -d ':' -f 2 | ./gps)
